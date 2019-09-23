@@ -4,5 +4,5 @@ import ru.kpfu.itis.darzam.chess.model.ChessBoardPropertiesDTO;
 
 public interface HorseService {
 
-    Integer getMinMoveCount(ChessBoardPropertiesDTO chessBoardPropertiesDTO);
+    short getMinMoveCount(ChessBoardPropertiesDTO chessBoardPropertiesDTO);
 }

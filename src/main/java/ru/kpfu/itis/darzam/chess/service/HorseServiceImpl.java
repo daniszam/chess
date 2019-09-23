@@ -1,13 +1,16 @@
 package ru.kpfu.itis.darzam.chess.service;
 
 import org.apache.poi.ss.util.CellReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.darzam.chess.model.ChessBoardPropertiesDTO;
 
 @Service
 public class HorseServiceImpl implements HorseService {
+    private Logger logger = LoggerFactory.getLogger(HorseServiceImpl.class);
 
-    public Integer getMinMoveCount(ChessBoardPropertiesDTO chessBoardPropertiesDTO) throws IllegalArgumentException {
+    public short getMinMoveCount(ChessBoardPropertiesDTO chessBoardPropertiesDTO) throws IllegalArgumentException {
         CellReference endCellReference = new CellReference(chessBoardPropertiesDTO.getEndPosition());
         short xEnd = endCellReference.getCol();
         int yEnd = endCellReference.getRow();
@@ -18,13 +21,17 @@ public class HorseServiceImpl implements HorseService {
 
         short chessBoardHeight = chessBoardPropertiesDTO.getHeight();
         short chessBoardWidth = chessBoardPropertiesDTO.getWidth();
-        if (xStart > chessBoardWidth || xEnd > chessBoardWidth || yStart > chessBoardHeight || yEnd > chessBoardHeight)
+        if (xStart > chessBoardWidth || xEnd > chessBoardWidth
+                || yStart > chessBoardHeight || yEnd > chessBoardHeight) {
+            logger.debug("invalid data width:%d, height:%d, start position: %s, end position: %s",
+                    chessBoardWidth, chessBoardHeight, chessBoardPropertiesDTO.getStartPosition(), chessBoardPropertiesDTO.getEndPosition());
             throw new IllegalArgumentException("invalid data");
+        }
 
         return getMinCountMoveFromStart(xEnd - xStart, yEnd - yStart);
     }
 
-    public static int getMinCountMoveFromStart(int x, int y) {
+    private static short getMinCountMoveFromStart(int x, int y) {
         // axes symmetry
         x = Math.abs(x);
         y = Math.abs(y);
@@ -44,6 +51,6 @@ public class HorseServiceImpl implements HorseService {
         // formula
         int delta = x - y;
         double divider = y > delta ? 3 : 4;
-        return (int) (delta - 2 * Math.floor(Math.floor((delta - y) / divider)));
+        return (short) (delta - 2 * Math.floor(Math.floor((delta - y) / divider)));
     }
 }

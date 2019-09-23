@@ -12,12 +12,12 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/horse/rest")
-public class HorseMinMoveRest {
+public class HorseRest {
 
     private final HorseService horseService;
 
     @GetMapping("/count")
-    public Integer getMinMove(@Valid ChessBoardPropertiesDTO chessBoardPropertiesDTO){
+    public Short getMinMove(@Valid ChessBoardPropertiesDTO chessBoardPropertiesDTO) {
         return horseService.getMinMoveCount(chessBoardPropertiesDTO);
     }
 }
