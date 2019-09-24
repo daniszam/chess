@@ -7,20 +7,20 @@
 2. Установить maven
 3. В корне проекта выполнить команду ```mvn clean package```
 4. Запуск
-    - #####Docker
-        ```docker build -t ИМЯ КОНТЕЙНЕРА -f Dockerfile .``` 
+    - Docker </br>
+       ```docker build -t ИМЯ КОНТЕЙНЕРА -f Dockerfile .``` 
         
         ```dockre run -p ЛОКАЛЬНЫЙ ПОРТ:8080 -t ИМЯ КОНТЕЙНЕРА```
-    - #####Maven
-        ```mvn spring-boot:run -Dserver.port=ЛОКАЛЬНЫЙ ПОРТ```
+    - Maven </br>
+       ```mvn spring-boot:run -Dserver.port=ЛОКАЛЬНЫЙ ПОРТ```
         
-###Использование
+### Использование
 - Servlet
     ```/horse/servlet/count```
 - Rest Controller 
     ```/horse/rest/count```
     
-    #####Входные параметры 
+    ##### Входные параметры 
       Стартовая позиция - startPosition
       Конечная позиция  - endPosition
       Ширина доски      - width
